@@ -73,12 +73,12 @@ st.markdown("""
 def convert_to_sar(amount):
     return amount * 3.75
 
-def format_currency(amount, currency='USD'):
-    return f"${amount:,.2f}" if currency == 'USD' else f"SAR {amount:,.2f}"
+def format_currency(amount):
+    return f"{amount:,.2f}"
 
 # Sidebar for inputs
 with st.sidebar:
-    st.image("Logo-01.png", width=100)  # Adjust the width as needed
+    st.image("Logo-01.png", width=200)  # Adjust the width as needed
     st.title("Financial Parameters")
     
     st.subheader("Timeline")
@@ -129,8 +129,8 @@ for i, (label, value) in enumerate(metrics):
         st.markdown(f"""
         <div class="metric-card">
             <p class="metric-label">{label}</p>
-            <p class="metric-value">{format_currency(value)}</p>
-            <p class="metric-sar">SAR {format_currency(convert_to_sar(value), 'SAR')}</p>
+            <p class="metric-value">USD {format_currency(value)}</p>
+            <p class="metric-sar">SAR {format_currency(convert_to_sar(value))}</p>
         </div>
         """, unsafe_allow_html=True)
 st.divider()
@@ -147,8 +147,8 @@ for i, (label, value) in enumerate(tax_fee_metrics):
         st.markdown(f"""
         <div class="metric-card">
             <p class="metric-label">{label}</p>
-            <p class="metric-value">{format_currency(value)}</p>
-            <p class="metric-sar">SAR {format_currency(convert_to_sar(value), 'SAR')}</p>
+            <p class="metric-value">USD {format_currency(value)}</p>
+            <p class="metric-sar">SAR {format_currency(convert_to_sar(value))}</p>
         </div>
         """, unsafe_allow_html=True)
 st.divider()
@@ -166,8 +166,8 @@ for i, (label, value) in enumerate(expense_metrics):
         st.markdown(f"""
         <div class="metric-card">
             <p class="metric-label">{label}</p>
-            <p class="metric-value">{format_currency(value)}</p>
-            <p class="metric-sar">SAR {format_currency(convert_to_sar(value), 'SAR')}</p>
+            <p class="metric-value">USD {format_currency(value)}</p>
+            <p class="metric-sar">SAR {format_currency(convert_to_sar(value))}</p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -180,20 +180,20 @@ Narra Financial Analysis Report
 Timeline: {months} months
 Currency: USD
 
-Revenue Projection: {format_currency(projected_revenue)}
-Total Expenses: {format_currency(total_expenses)}
-Profit: {format_currency(profit)}
+Revenue Projection: USD {format_currency(projected_revenue)}
+Total Expenses: USD {format_currency(total_expenses)}
+Profit: USD {format_currency(profit)}
 
 Expenses Breakdown:
-- Employee Costs: {format_currency(total_employee_costs)}
-- LLM Costs: {format_currency(total_llm_cost)}
-- Fixed Expenses: {format_currency(total_fixed_expenses)}
+- Employee Costs: USD {format_currency(total_employee_costs)}
+- LLM Costs: USD {format_currency(total_llm_cost)}
+- Fixed Expenses: USD {format_currency(total_fixed_expenses)}
 
 Break-Even Point: {break_even_point:.2f} months
-Revenue Per Employee: {format_currency(revenue_per_employee)}
+Revenue Per Employee: USD {format_currency(revenue_per_employee)}
 
-Estimated Tax: {format_currency(estimated_tax)}
-App Store Fee: {format_currency(apple_tax)}
+Estimated Tax: USD {format_currency(estimated_tax)}
+App Store Fee: USD {format_currency(apple_tax)}
 """
 
 st.download_button(
